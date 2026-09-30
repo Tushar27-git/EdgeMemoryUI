@@ -1,0 +1,326 @@
+/* tokens.css. Self-hosted fonts only; no remote @import. */
+@font-face {
+  font-family: "Rozha One";
+  src: url("/fonts/RozhaOne-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Instrument Sans";
+  src: url("/fonts/InstrumentSans-Variable.ttf") format("truetype");
+  font-weight: 400 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Geist Mono";
+  src: url("/fonts/GeistMono-Variable.ttf") format("truetype");
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+:root {
+  color-scheme: light dark;
+  --font-display: "Rozha One", "Chonburi", "DM Serif Display", ui-serif, serif; /* headline voice only */
+  --font-ui: "Instrument Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: "Geist Mono", monospace;
+
+  --r-xs: 8px;
+  --r-sm: 12px;
+  --r-md: 18px;
+  --r-lg: 28px;
+  --r-pill: 999px;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-soft: cubic-bezier(0.37, 0, 0.63, 1);
+  --ease-standard: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --dur-micro: 140ms;
+  --dur-ui: 260ms;
+  --dur-large: 520ms;
+  --dur-breathe: 4.5s;
+}
+
+/* Light (default): Linen ground, Dolphin ink and accent, Amethyst decoration */
+:root, :root[data-theme="light"] {
+  --bg: #FDF1E2;
+  --surface: #FFF8EE;
+  --raised: #FFFCF6;
+  --tint: #F5E6EE;
+  --line: #E7D9CB;
+  --text: #2B2140;
+  --heading: #4B3A66;
+  --text-muted: #655A7C;
+  --accent: #655A7C;
+  --accent-hover: #574B6D;
+  --on-accent: #FDF1E2;
+  --deco: #AB92BF; /* decoration only, never text */
+  --state-local: #74529A;
+  --state-queued: #A87A14;
+  --state-synced: #1C8580;
+  --state-conflict: #C13C3B;
+  --shadow-clay:
+    0 1px 2px rgb(43 33 64 / 0.06),
+    0 10px 28px rgb(43 33 64 / 0.08),
+    inset 0 1px 0 rgb(255 255 255 / 0.7),
+    inset 0 -2px 4px rgb(43 33 64 / 0.04);
+  --shadow-subtle:
+    0 1px 3px rgb(43 33 64 / 0.05),
+    0 4px 12px rgb(43 33 64 / 0.04);
+}
+
+/* Dark mode */
+:root[data-theme="dark"] {
+  --bg: #241E32;
+  --surface: #2F2840;
+  --raised: #3A3250;
+  --tint: #3A3250;
+  --line: #4A4163;
+  --text: #FDF1E2;
+  --heading: #FDF1E2;
+  --text-muted: #B7ADC9;
+  --accent: #C9B4DC;
+  --accent-hover: #D9C9E8;
+  --on-accent: #241E32;
+  --deco: #AB92BF;
+  --state-local: #AB92BF;
+  --state-queued: #F1DF88;
+  --state-synced: #77E0D3;
+  --state-conflict: #F68482;
+  --shadow-clay:
+    inset 0 1px 0 rgb(255 255 255 / 0.05),
+    0 0 0 1px var(--line),
+    0 8px 24px rgb(16 12 24 / 0.4);
+  --shadow-subtle:
+    inset 0 1px 0 rgb(255 255 255 / 0.04),
+    0 0 0 1px var(--line);
+}
+
+/* Base resets */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-ui);
+  font-size: 15px;
+  line-height: 24px;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color var(--dur-ui) var(--ease-standard),
+              color var(--dur-ui) var(--ease-standard);
+  user-select: none;
+}
+
+/* Typography styles per DESIGN.md 5.4 */
+.t-display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 52px;
+  color: var(--heading);
+  letter-spacing: -0.01em;
+  font-synthesis: none;
+  text-wrap: balance;
+}
+
+.t-h1 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 34px;
+  line-height: 40px;
+  color: var(--heading);
+  letter-spacing: -0.01em;
+  font-synthesis: none;
+}
+
+.t-stat {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 34px;
+  line-height: 36px;
+  color: var(--heading);
+  letter-spacing: -0.01em;
+  font-synthesis: none;
+}
+
+.t-h2 {
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 26px;
+  line-height: 32px;
+  color: var(--text);
+}
+
+.t-h3 {
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 28px;
+  color: var(--text);
+}
+
+.t-body-lg {
+  font-family: var(--font-ui);
+  font-size: 17px;
+  line-height: 26px;
+  font-weight: 400;
+}
+
+.t-body {
+  font-family: var(--font-ui);
+  font-size: 15px;
+  line-height: 24px;
+  font-weight: 400;
+}
+
+.t-small {
+  font-family: var(--font-ui);
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 400;
+}
+
+.t-micro {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.t-mono {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Tinted state chips (DESIGN.md 4.6 & 9) */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px;
+  border-radius: var(--r-pill);
+  font-family: var(--font-ui);
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--text);
+  border: 1px solid transparent;
+}
+
+.chip[data-state="local"] {
+  background: color-mix(in oklch, var(--state-local) 16%, var(--surface));
+  border-color: color-mix(in oklch, var(--state-local) 24%, var(--surface));
+}
+
+.chip[data-state="queued"] {
+  background: color-mix(in oklch, var(--state-queued) 16%, var(--surface));
+  border-color: color-mix(in oklch, var(--state-queued) 24%, var(--surface));
+}
+
+.chip[data-state="synced"] {
+  background: color-mix(in oklch, var(--state-synced) 16%, var(--surface));
+  border-color: color-mix(in oklch, var(--state-synced) 24%, var(--surface));
+}
+
+.chip[data-state="conflict"] {
+  background: color-mix(in oklch, var(--state-conflict) 16%, var(--surface));
+  border-color: color-mix(in oklch, var(--state-conflict) 24%, var(--surface));
+}
+
+/* Interactive elements */
+button, input, textarea, select {
+  font-family: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  transition: transform var(--dur-micro) var(--ease-out-expo),
+              background-color var(--dur-micro) var(--ease-standard),
+              opacity var(--dur-micro) var(--ease-standard);
+}
+
+button:active {
+  transform: scale(0.97);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Animations */
+@keyframes breathe {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(1.12);
+    opacity: 1;
+  }
+}
+
+.animate-breathe {
+  animation: breathe var(--dur-breathe) var(--ease-in-out-soft) infinite;
+}
+
+@keyframes conflict-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(1.18);
+    opacity: 1;
+  }
+}
+
+.animate-conflict {
+  animation: conflict-pulse 2.2s var(--ease-in-out-soft) infinite;
+}
+
+/* Custom scrollbars without slop */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--line);
+  border-radius: var(--r-pill);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
